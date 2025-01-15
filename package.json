@@ -2,10 +2,7 @@
     "name": "react-simple-table-component",
     "version": "1.0.2",
     "description": "A simple table react component.",
-    "main": "dist/Table.jsx",
-    "scripts": {
-        "build": "babel src --out-dir dist"
-    },
+    "main": "src/Table.jsx",
     "repository": {
         "type": "git",
         "url": "https://github.com/Julien-Ba/simple-table.git"
@@ -20,10 +17,6 @@
     },
     "homepage": "https://github.com/Julien-Ba/simple-table",
     "dependencies": {
-        "@babel/cli": "^7.26.4",
-        "@babel/core": "^7.26.0",
-        "@babel/preset-env": "^7.26.0",
-        "@babel/preset-react": "^7.26.3",
         "react": "^18.3.1",
         "react-dom": "^18.3.1",
         "sass": "^1.83.0",
