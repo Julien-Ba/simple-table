@@ -3,24 +3,24 @@
     "version": "1.0.0",
     "description": "A simple table react component.",
     "main": "dist/index.js",
-    "module": "dist/index.esm.js",
-    "style": "dist/table.css",
+    "style": "dist/styles.css",
     "sass": "src/index.scss",
     "files": [
-        "dist",
-        "src"
+        "dist"
     ],
     "scripts": {
         "build": "webpack --mode production",
-        "build:css": "sass src/index.scss dist/table.css",
-        "prepare": "npm run build && npm run build:css"
+        "prepare": "npm run build"
     },
     "repository": {
         "type": "git",
         "url": "https://github.com/Julien-Ba/simple-table.git"
     },
     "keywords": [
-        "table"
+        "table",
+        "react",
+        "react-component",
+        "react-table"
     ],
     "author": "julien-ba",
     "license": "ISC",
@@ -42,9 +42,9 @@
         "@babel/preset-react": "^7.22.0",
         "babel-loader": "^9.1.0",
         "css-loader": "^6.8.0",
+        "mini-css-extract-plugin": "^2.9.2",
         "sass": "^1.80.0",
         "sass-loader": "^13.3.0",
-        "style-loader": "^3.3.0",
         "webpack": "^5.88.0",
         "webpack-cli": "^5.1.0"
     }
