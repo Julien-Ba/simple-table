@@ -2,25 +2,16 @@
     "name": "react-simple-table-component",
     "version": "1.0.1",
     "description": "A simple table react component.",
-    "main": "dist/index.js",
-    "style": "dist/styles.css",
-    "sass": "src/index.scss",
-    "files": [
-        "dist"
-    ],
+    "main": "dist/Table.jsx",
     "scripts": {
-        "build": "webpack --mode production",
-        "prepare": "npm run build"
+        "build": "babel src --out-dir dist"
     },
     "repository": {
         "type": "git",
         "url": "https://github.com/Julien-Ba/simple-table.git"
     },
     "keywords": [
-        "table",
-        "react",
-        "react-component",
-        "react-table"
+        "table"
     ],
     "author": "julien-ba",
     "license": "ISC",
@@ -29,23 +20,13 @@
     },
     "homepage": "https://github.com/Julien-Ba/simple-table",
     "dependencies": {
+        "@babel/cli": "^7.26.4",
+        "@babel/core": "^7.26.0",
+        "@babel/preset-env": "^7.26.0",
+        "@babel/preset-react": "^7.26.3",
+        "react": "^18.3.1",
+        "react-dom": "^18.3.1",
+        "sass": "^1.83.0",
         "str-case-converter": "^1.0.4"
-    },
-    "peerDependencies": {
-        "prop-types": ">=15.7.0",
-        "react": ">=16.8.0",
-        "react-dom": ">=16.8.0"
-    },
-    "devDependencies": {
-        "@babel/core": "^7.23.0",
-        "@babel/preset-env": "^7.22.0",
-        "@babel/preset-react": "^7.22.0",
-        "babel-loader": "^9.1.0",
-        "css-loader": "^6.8.0",
-        "mini-css-extract-plugin": "^2.9.2",
-        "sass": "^1.80.0",
-        "sass-loader": "^13.3.0",
-        "webpack": "^5.88.0",
-        "webpack-cli": "^5.1.0"
     }
 }
