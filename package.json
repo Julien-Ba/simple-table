@@ -2,7 +2,22 @@
     "name": "react-simple-table-component",
     "version": "1.0.3",
     "description": "A simple table react component.",
-    "main": "src/Table.jsx",
+    "type": "module",
+    "main": "dist/index.js",
+    "module": "dist/index.js",
+    "exports": {
+        ".": {
+            "import": "./dist/index.js"
+        },
+        "./styles": "./dist/styles.css"
+    },
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "build": "rollup -c rollup.config.mjs",
+        "prepare": "npm run build"
+    },
     "repository": {
         "type": "git",
         "url": "https://github.com/Julien-Ba/simple-table.git"
@@ -17,9 +32,21 @@
     },
     "homepage": "https://github.com/Julien-Ba/simple-table",
     "dependencies": {
-        "react": "^18.3.1",
-        "react-dom": "^18.3.1",
-        "sass": "^1.83.0",
         "str-case-converter": "^1.0.4"
+    },
+    "peerDependencies": {
+        "prop-types": "^15.8.0",
+        "react": "^18.0.0",
+        "react-dom": "^18.0.0"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.26.0",
+        "@babel/preset-env": "^7.26.0",
+        "@babel/preset-react": "^7.26.3",
+        "@rollup/plugin-babel": "^6.0.4",
+        "@rollup/plugin-node-resolve": "^16.0.0",
+        "rollup": "^4.30.1",
+        "rollup-plugin-scss": "^4.0.1",
+        "sass": "^1.83.0"
     }
 }
