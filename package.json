@@ -7,9 +7,9 @@
     "module": "dist/index.js",
     "exports": {
         ".": {
-            "import": "./dist/index.js"
-        },
-        "./styles": "./dist/styles.css"
+            "import": "./dist/index.js",
+            "require": "./dist/index.js"
+        }
     },
     "files": [
         "dist"
@@ -31,6 +31,7 @@
         "url": "https://github.com/Julien-Ba/simple-table/issues"
     },
     "homepage": "https://github.com/Julien-Ba/simple-table",
+    "sideEffects": true,
     "dependencies": {
         "str-case-converter": "^1.0.4"
     },
