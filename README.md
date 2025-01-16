@@ -8,7 +8,7 @@ A simple table React component with built-in sorting, searching, and pagination 
 -   ↕️ Sortable columns
 -   📑 Pagination with customizable items per page
 -   🎨 Customizable styling through CSS classes
--   📱 Responsive design
+-   ⚡️ Tested with Vite and Create React App
 
 ## Dependencies
 
@@ -20,7 +20,8 @@ These will be installed automatically when you install the package:
 
 ```json
 {
-    "str-case-converter": "^1.0.4"
+    "prop-types": ">=15.8.0",
+    "str-case-converter": ">=1.0.4"
 }
 ```
 
@@ -32,9 +33,8 @@ These are required to be installed in your project:
 
 ```json
 {
-    "react": ">=16.8.0",
-    "react-dom": ">=16.8.0",
-    "prop-types": ">=15.7.0"
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
 }
 ```
 
@@ -44,7 +44,15 @@ These are only needed if you're contributing to the component's development:
 
 ```json
 {
-    "sass": "^1.80.0"
+    "@babel/core": "^7.26.0",
+    "@babel/preset-env": "^7.26.0",
+    "@babel/preset-react": "^7.26.3",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-commonjs": "^25.0.0",
+    "@rollup/plugin-node-resolve": "^16.0.0",
+    "rollup": "^4.30.1",
+    "rollup-plugin-sass": "^1.15.0",
+    "sass": "^1.83.0"
 }
 ```
 
@@ -71,6 +79,8 @@ const MyComponent = () => {
 ```
 
 ## Props
+
+There is no props required but it would only show an empty table without `data`.
 
 ### Table Component
 
@@ -143,6 +153,10 @@ The component uses BEM methodology for CSS classes. Here are the main classes av
         &-controls {
         }
         &-button {
+            &:disabled {
+            }
+            &:hover:not(:disabled) {
+            }
         }
     }
     &__empty {
