@@ -4,15 +4,16 @@ import { nodeResolve } from '@rollup/plugin-node-resolve';
 
 export default {
     input: 'src/Table.jsx',
-    output: [
-        {
-            file: 'dist/index.js',
-            format: 'esm',
-        },
-    ],
+    output: {
+        dir: 'dist',
+        format: 'es',
+        preserveModules: true,
+        preserveModulesRoot: 'src',
+        exports: 'named',
+    },
     plugins: [
         nodeResolve({
-            extensions: ['.js', '.jsx'],
+            extensions: ['.js', '.jsx', '.scss'],
         }),
         sass({
             insert: true,

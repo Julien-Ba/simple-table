@@ -1,12 +1,15 @@
 {
     "name": "react-simple-table-component",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "description": "A simple table react component.",
     "type": "module",
-    "main": "dist/index.js",
-    "module": "dist/index.js",
+    "main": "./dist/Table.js",
+    "module": "./dist/Table.js",
     "exports": {
-        ".": "./dist/index.js"
+        ".": {
+            "import": "./dist/Table.js",
+            "require": "./dist/Table.js"
+        }
     },
     "files": [
         "dist"
@@ -42,6 +45,7 @@
         "@babel/preset-env": "^7.26.0",
         "@babel/preset-react": "^7.26.3",
         "@rollup/plugin-babel": "^6.0.4",
+        "@rollup/plugin-commonjs": "^25.0.0",
         "@rollup/plugin-node-resolve": "^16.0.0",
         "rollup": "^4.30.1",
         "rollup-plugin-sass": "^1.15.0",
