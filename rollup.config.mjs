@@ -1,5 +1,5 @@
 import babel from '@rollup/plugin-babel';
-import sass from 'rollup-plugin-scss';
+import sass from 'rollup-plugin-sass';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 
 export default {
@@ -12,8 +12,7 @@ export default {
     ],
     plugins: [
         nodeResolve({
-            extensions: ['.js', '.jsx', '.scss'],
-            moduleDirectories: ['node_modules', 'src'],
+            extensions: ['.js', '.jsx'],
         }),
         sass({
             insert: true,
@@ -21,7 +20,8 @@ export default {
             options: {
                 style: 'compressed',
             },
-            include: ['src/**/*.scss'],
+            include: ['**/*.scss'],
+            exclude: ['node_modules/**'],
         }),
         babel({
             babelHelpers: 'bundled',

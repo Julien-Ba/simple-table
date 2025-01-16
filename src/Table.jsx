@@ -1,4 +1,5 @@
 import './table.scss';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { useMemo, useState } from 'react';
 import { convertString } from 'str-case-converter';
