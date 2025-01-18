@@ -16,8 +16,13 @@
         &:focus {
             max-width: 24rem;
             outline: none;
-            border-color: colors.$primary;
-            box-shadow: 0 0 0 2px rgba(colors.$primary, 0.1);
+            border-color: rgba($color: colors.$primary, $alpha: 0.7);
+            box-shadow: 0 0 0 1px rgba($color: colors.$primary, $alpha: 0.3),
+                0 0 0 2px rgba($color: colors.$primary, $alpha: 0.1);
+
+            @media (max-width: 768px) {
+                max-width: 100%;
+            }
         }
     }
 
