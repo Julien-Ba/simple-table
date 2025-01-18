@@ -2,8 +2,7 @@
 @use './style/colors';
 
 .table {
-    display: flex;
-    flex-direction: column;
+    display: grid;
     gap: 1.5rem;
 
     &__table {
