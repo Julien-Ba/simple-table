@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { useMemo, useState } from 'react';
 import { convertString } from 'str-case-converter';
 import { ChevronDown } from './subcomponents/icons';
+import PageSizeSelector from './subcomponents/PageSizeSelector';
 import TablePagination from './subcomponents/TablePagination';
 import TableSearch from './subcomponents/TableSearch';
 
@@ -11,12 +12,16 @@ export default function Table({
     name = '',
     data = {},
     itemsPerPage = 10,
+    pageSizeOptions = [5, 10, 25, 50],
     searchAriaLabel,
     searchPlaceHolder,
+    disableSearch = false,
+    disablePageSize = false,
 }) {
     const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
     const [searchTerm, setSearchTerm] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
+    const [pageSize, setPageSize] = useState(itemsPerPage);
     const columns = Object.keys(data[0] || {});
 
     const handleSort = (column) => {
@@ -25,6 +30,11 @@ export default function Table({
             direction = 'desc';
         }
         setSortConfig({ key: column, direction });
+    };
+
+    const handlePageSizeChange = (newPageSize) => {
+        setPageSize(newPageSize);
+        setCurrentPage(1);
     };
 
     const filteredAndSortedData = useMemo(() => {
@@ -53,23 +63,34 @@ export default function Table({
         return processedData;
     }, [data, searchTerm, sortConfig]);
 
-    const totalPages = Math.ceil(filteredAndSortedData.length / itemsPerPage);
+    const totalPages = Math.ceil(filteredAndSortedData.length / pageSize);
     const paginatedData = filteredAndSortedData.slice(
-        (currentPage - 1) * itemsPerPage,
-        currentPage * itemsPerPage
+        (currentPage - 1) * pageSize,
+        currentPage * pageSize
     );
 
     return (
         <div
             className={`table table__container${name && ` ${convertString.toKebab(name)}__table`}`}
         >
-            <TableSearch
-                searchTerm={searchTerm}
-                onSearchChange={setSearchTerm}
-                name={name}
-                searchAriaLabel={searchAriaLabel}
-                searchPlaceHolder={searchPlaceHolder}
-            />
+            <div className='table__controls'>
+                {!disableSearch && (
+                    <TableSearch
+                        searchTerm={searchTerm}
+                        onSearchChange={setSearchTerm}
+                        name={name}
+                        searchAriaLabel={searchAriaLabel}
+                        searchPlaceHolder={searchPlaceHolder}
+                    />
+                )}
+                {!disablePageSize && (
+                    <PageSizeSelector
+                        pageSize={pageSize}
+                        onPageSizeChange={handlePageSizeChange}
+                        pageSizeOptions={pageSizeOptions}
+                    />
+                )}
+            </div>
             <table className='table__table'>
                 <thead>
                     <tr>
@@ -113,7 +134,7 @@ export default function Table({
             <TablePagination
                 currentPage={currentPage}
                 totalPages={totalPages}
-                itemsPerPage={itemsPerPage}
+                itemsPerPage={pageSize}
                 totalItems={filteredAndSortedData.length}
                 onPageChange={setCurrentPage}
             />
@@ -125,6 +146,9 @@ Table.propTypes = {
     name: PropTypes.string,
     data: PropTypes.array,
     itemsPerPage: PropTypes.number,
+    pageSizeOptions: PropTypes.arrayOf(PropTypes.number),
     searchAriaLabel: PropTypes.string,
     searchPlaceHolder: PropTypes.string,
+    disableSearch: PropTypes.bool,
+    disablePageSize: PropTypes.bool,
 };

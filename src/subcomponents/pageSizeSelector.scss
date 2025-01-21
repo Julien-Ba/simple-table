@@ -1,0 +1,20 @@
+@use '../style/colors';
+
+.table {
+    &__page-size {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+
+        &-label {
+            font-size: 0.875rem;
+        }
+
+        &-select {
+            padding: 0.25rem;
+            border: 1px solid colors.$border;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+        }
+    }
+}
