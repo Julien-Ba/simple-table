@@ -1,6 +1,6 @@
 {
     "name": "react-simple-table-component",
-    "version": "1.0.11",
+    "version": "1.0.12",
     "description": "A simple table react component.",
     "type": "module",
     "main": "./dist/Table.js",
