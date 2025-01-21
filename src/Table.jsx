@@ -7,7 +7,13 @@ import { ChevronDown } from './subcomponents/icons';
 import TablePagination from './subcomponents/TablePagination';
 import TableSearch from './subcomponents/TableSearch';
 
-export default function Table({ name = '', data = {}, itemsPerPage = 10 }) {
+export default function Table({
+    name = '',
+    data = {},
+    itemsPerPage = 10,
+    searchAriaLabel,
+    searchPlaceHolder,
+}) {
     const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
     const [searchTerm, setSearchTerm] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
@@ -54,8 +60,16 @@ export default function Table({ name = '', data = {}, itemsPerPage = 10 }) {
     );
 
     return (
-        <div className={`table table__container ${convertString.toKebab(name)}__table`}>
-            <TableSearch searchTerm={searchTerm} onSearchChange={setSearchTerm} />
+        <div
+            className={`table table__container${name && ` ${convertString.toKebab(name)}__table`}`}
+        >
+            <TableSearch
+                searchTerm={searchTerm}
+                onSearchChange={setSearchTerm}
+                name={name}
+                searchAriaLabel={searchAriaLabel}
+                searchPlaceHolder={searchPlaceHolder}
+            />
             <table className='table__table'>
                 <thead>
                     <tr>
@@ -111,4 +125,6 @@ Table.propTypes = {
     name: PropTypes.string,
     data: PropTypes.array,
     itemsPerPage: PropTypes.number,
+    searchAriaLabel: PropTypes.string,
+    searchPlaceHolder: PropTypes.string,
 };
