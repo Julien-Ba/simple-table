@@ -11,12 +11,12 @@ export default function TableSearch({
     searchAriaLabel = 'Search table entries',
     searchPlaceHolder = 'Search...',
 }) {
-    const kebabName = convertString.toKebab(name);
+    const kebabName = `${convertString.toKebab(name)}-table-search`;
     return (
         <div className='table__search'>
             <input
                 {...(kebabName ? { id: kebabName } : {})}
-                name={kebabName || 'table__search'}
+                name={kebabName || 'table-search'}
                 className='table__search-input'
                 aria-label={searchAriaLabel}
                 type='text'
