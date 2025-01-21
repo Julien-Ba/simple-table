@@ -5,21 +5,21 @@ import PropTypes from 'prop-types';
 export default function PageSizeSelector({ pageSize, onPageSizeChange, pageSizeOptions }) {
     return (
         <div className='table__page-size'>
-            <label className='table__page-size-label' htmlFor='page-size'>
-                Items per page:
+            <label className='table__page-size-label'>
+                Shows{' '}
+                <select
+                    className='table__page-size-select'
+                    value={pageSize}
+                    onChange={(e) => onPageSizeChange(Number(e.target.value))}
+                >
+                    {pageSizeOptions.map((size) => (
+                        <option key={size} value={size}>
+                            {size}
+                        </option>
+                    ))}
+                </select>{' '}
+                entries
             </label>
-            <select
-                name='page-size'
-                className='table__page-size-select'
-                value={pageSize}
-                onChange={(e) => onPageSizeChange(Number(e.target.value))}
-            >
-                {pageSizeOptions.map((size) => (
-                    <option key={size} value={size}>
-                        {size}
-                    </option>
-                ))}
-            </select>
         </div>
     );
 }
