@@ -35,6 +35,10 @@ export default function Table({
             direction = 'desc';
         }
         setSortConfig({ key: column, direction });
+    };
+
+    const handleSearchChange = (value) => {
+        setSearchTerm(value);
         setPreviousPageIfNoEntries();
     };
 
@@ -83,7 +87,7 @@ export default function Table({
                 {!disableSearch && (
                     <TableSearch
                         searchTerm={searchTerm}
-                        onSearchChange={setSearchTerm}
+                        onSearchChange={handleSearchChange}
                         name={name}
                         searchAriaLabel={searchAriaLabel}
                         searchPlaceHolder={searchPlaceHolder}
