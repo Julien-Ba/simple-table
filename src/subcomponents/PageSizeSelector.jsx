@@ -8,6 +8,7 @@ export default function PageSizeSelector({ pageSize, onPageSizeChange, pageSizeO
             <label className='table__page-size-label'>
                 Shows{' '}
                 <select
+                    name='size-select'
                     className='table__page-size-select'
                     value={pageSize}
                     onChange={(e) => onPageSizeChange(Number(e.target.value))}
