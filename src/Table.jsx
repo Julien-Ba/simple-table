@@ -24,17 +24,23 @@ export default function Table({
     const [pageSize, setPageSize] = useState(itemsPerPage);
     const columns = Object.keys(data[0] || {});
 
+    const setPreviousPageIfNoEntries = () => {
+        if (currentPage === 1) return;
+        if (paginatedData < 1) setCurrentPage(currentPage - 1);
+    };
+
     const handleSort = (column) => {
         let direction = 'asc';
         if (sortConfig.key === column && sortConfig.direction === 'asc') {
             direction = 'desc';
         }
         setSortConfig({ key: column, direction });
+        setPreviousPageIfNoEntries();
     };
 
     const handlePageSizeChange = (newPageSize) => {
         setPageSize(newPageSize);
-        setCurrentPage(1);
+        setPreviousPageIfNoEntries();
     };
 
     const filteredAndSortedData = useMemo(() => {
