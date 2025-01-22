@@ -1,7 +1,6 @@
 import './table.scss';
-import React from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
-import { useMemo, useState } from 'react';
 import { convertString } from 'str-case-converter';
 import { ChevronDown } from './subcomponents/icons';
 import PageSizeSelector from './subcomponents/PageSizeSelector';
@@ -10,7 +9,7 @@ import TableSearch from './subcomponents/TableSearch';
 
 export default function Table({
     name = '',
-    data = {},
+    data = [],
     itemsPerPage = 10,
     pageSizeOptions = [5, 10, 25, 50],
     searchAriaLabel,
@@ -24,10 +23,12 @@ export default function Table({
     const [pageSize, setPageSize] = useState(itemsPerPage);
     const columns = Object.keys(data[0] || {});
 
-    const setPreviousPageIfNoEntries = () => {
+    useEffect(() => {
         if (currentPage === 1) return;
-        if (paginatedData < 1) setCurrentPage(currentPage - 1);
-    };
+        if (filteredAndSortedData.length <= (currentPage - 1) * pageSize) {
+            setCurrentPage(currentPage - 1);
+        }
+    }, [filteredAndSortedData, currentPage, pageSize]);
 
     const handleSort = (column) => {
         let direction = 'asc';
@@ -35,16 +36,6 @@ export default function Table({
             direction = 'desc';
         }
         setSortConfig({ key: column, direction });
-    };
-
-    const handleSearchChange = (value) => {
-        setSearchTerm(value);
-        setPreviousPageIfNoEntries();
-    };
-
-    const handlePageSizeChange = (newPageSize) => {
-        setPageSize(newPageSize);
-        setPreviousPageIfNoEntries();
     };
 
     const filteredAndSortedData = useMemo(() => {
@@ -87,7 +78,7 @@ export default function Table({
                 {!disableSearch && (
                     <TableSearch
                         searchTerm={searchTerm}
-                        onSearchChange={handleSearchChange}
+                        onSearchChange={setSearchTerm}
                         name={name}
                         searchAriaLabel={searchAriaLabel}
                         searchPlaceHolder={searchPlaceHolder}
@@ -96,7 +87,7 @@ export default function Table({
                 {!disablePageSize && (
                     <PageSizeSelector
                         pageSize={pageSize}
-                        onPageSizeChange={handlePageSizeChange}
+                        onPageSizeChange={setPageSize}
                         pageSizeOptions={pageSizeOptions}
                     />
                 )}
@@ -125,8 +116,8 @@ export default function Table({
                 </thead>
                 <tbody>
                     {paginatedData.length > 0 ? (
-                        paginatedData.map((entry, index) => (
-                            <tr key={index}>
+                        paginatedData.map((entry) => (
+                            <tr key={`${entry.id || JSON.stringify(entry)}`}>
                                 {columns.map((column) => (
                                     <td key={column}>{entry[column]}</td>
                                 ))}
