@@ -23,21 +23,6 @@ export default function Table({
     const [pageSize, setPageSize] = useState(itemsPerPage);
     const columns = Object.keys(data[0] || {});
 
-    useEffect(() => {
-        if (currentPage === 1) return;
-        if (filteredAndSortedData.length <= (currentPage - 1) * pageSize) {
-            setCurrentPage(currentPage - 1);
-        }
-    }, [filteredAndSortedData, currentPage, pageSize]);
-
-    const handleSort = (column) => {
-        let direction = 'asc';
-        if (sortConfig.key === column && sortConfig.direction === 'asc') {
-            direction = 'desc';
-        }
-        setSortConfig({ key: column, direction });
-    };
-
     const filteredAndSortedData = useMemo(() => {
         let processedData = [...data];
 
@@ -63,6 +48,20 @@ export default function Table({
 
         return processedData;
     }, [data, searchTerm, sortConfig]);
+
+    useEffect(() => {
+        if (currentPage > 1 && filteredAndSortedData.length <= (currentPage - 1) * pageSize) {
+            setCurrentPage(currentPage - 1);
+        }
+    }, [filteredAndSortedData, currentPage, pageSize]);
+
+    const handleSort = (column) => {
+        let direction = 'asc';
+        if (sortConfig.key === column && sortConfig.direction === 'asc') {
+            direction = 'desc';
+        }
+        setSortConfig({ key: column, direction });
+    };
 
     const totalPages = Math.ceil(filteredAndSortedData.length / pageSize);
     const paginatedData = filteredAndSortedData.slice(
